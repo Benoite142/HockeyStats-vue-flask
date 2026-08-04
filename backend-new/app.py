@@ -12,7 +12,10 @@ SEARCH_PLAYER_API_URL = 'https://search.d3.nhle.com/api/v1/search/player?culture
 
 @app.route('/search', methods=['GET'])
 def search_player_api():
-    query = request.args.get('q', 'sidney')
+    query = request.args.get('q')
+    if not query:
+        return jsonify({'error': 'Missing query parameter q'}), 400
+
     url = SEARCH_PLAYER_API_URL + query
 
     response = requests.get(url, timeout=10)
