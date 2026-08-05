@@ -20,8 +20,29 @@ def search_player_api():
 
     response = requests.get(url, timeout=10)
     response.raise_for_status()
+    raw = response.json()
 
-    return jsonify(response.json())
+    if isinstance(raw, dict):
+        items = raw.get('data', []) if isinstance(raw.get('data', []), list) else []
+    elif isinstance(raw, list):
+        items = raw
+    else:
+        items = []
+
+    players = []
+    for item in items:
+        if not isinstance(item, dict):
+            continue
+
+        player_id = item.get('playerId') or item.get('id')
+        name = item.get('name') or item.get('fullName')
+        if player_id and name:
+            players.append({
+                'playerId': player_id,
+                'name': name,
+            })
+
+    return jsonify(players)
 
 
 if __name__== '__main__':

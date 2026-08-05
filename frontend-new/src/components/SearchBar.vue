@@ -1,23 +1,32 @@
 <template>
-  <div class="container">
-    <input
-      v-model="input"
-      @keyup.enter="searchPlayers"
-      placeholder="Search players"
-    />
+  <section class="search-section">
+    <div class="search-container">
+      <div class="search-box-wrapper">
+        <input
+          v-model="input"
+          id="search"
+          class="enhaced-search-input"
+          @keyup.enter="searchPlayers"
+          placeholder="Search players"
+        />
+        <div class="search-clear" id="search-clear" style="display: none">
+          ✕
+        </div>
+      </div>
 
-    <button @click="searchPlayers">Search</button>
+      <button @click="searchPlayers">Search</button>
 
-    <div v-if="loading">Loading...</div>
+      <div v-if="loading">Loading...</div>
 
-    <div v-for="player in results" :key="player.playerId" class="player">
-      <p>{{ player.name }}</p>
+      <div v-for="player in results" :key="player.playerId" class="player">
+        <p>{{ player.name }}</p>
+      </div>
+
+      <div v-if="input && !results.length && !loading" class="item error">
+        <p>No players found!</p>
+      </div>
     </div>
-
-    <div v-if="input && !results.length && !loading" class="item error">
-      <p>No players found!</p>
-    </div>
-  </div>
+  </section>
 </template>
 
 <script setup>
