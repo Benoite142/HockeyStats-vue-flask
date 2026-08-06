@@ -11,6 +11,7 @@
       <h1>{{ player.firstName }} {{ player.lastName }}</h1>
       <p>Team: {{ player.currentTeamAbbrev }}</p>
       <p>Position: {{ player.position }}</p>
+      <p>Birth Country: {{ player.birthCountry }}</p>
       <!-- show other player fields -->
     </div>
 
