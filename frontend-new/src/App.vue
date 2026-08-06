@@ -1,13 +1,13 @@
 <script setup>
-import {RouterView} from 'vue-router'
+import { RouterView } from 'vue-router'
+import Header from './components/Header.vue'
 </script>
 
 <template>
-  <RouterView />
+  <body class="search-page">
+    <Header />
+    <main class="main-content">
+      <RouterView />
+    </main>
+  </body>
 </template>
-
-<style>
-#app{
-  margin-top: 60px;
-}
-</style>
