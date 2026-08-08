@@ -7,14 +7,6 @@
       <p>Loading for player statistics...</p>
     </div> -->
 
-    <!-- <div v-if="player">
-      <h1>{{ player.firstName }} {{ player.lastName }}</h1>
-      <p>Team: {{ player.currentTeamAbbrev }}</p>
-      <p>Position: {{ player.position }}</p>
-      <p>Birth Country: {{ player.birthCountry }}</p>
-      <!-- show other player fields -->
-    <!--</div> -->
-
     <!-- Player Information Section -->
     <section
       id="player-info-section"
@@ -109,21 +101,13 @@
     </section>
 
     <!-- Player Statistics Section -->
-    <section
-      id="player-stats-section"
-      class="stats-section"
-      style="display: none"
-    >
-      <div class="section-header">
-        <h2>Career Statistics</h2>
-      </div>
-      <div id="player-stats" class="enhanced-stats-container"></div>
-    </section>
+    <PlayerStats :player="player" />
   </main>
 </template>
 
 <script setup>
 import { onMounted, ref } from 'vue'
+import PlayerStats from '@/components/PlayerStats.vue'
 
 const props = defineProps({
   id: String
