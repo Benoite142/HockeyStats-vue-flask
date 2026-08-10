@@ -6,22 +6,25 @@
 
     <div class="stats-section-header">
       <button
-        class="nav-button primary active"
-        onclick="toggleStats('regular')"
+        class="nav-button primary"
+        :class="{ active: activeStatsTab === 'regular' }"
+        @click="activeStatsTab = 'regular'"
         id="regular-btn"
       >
         Season Stats
       </button>
       <button
         class="nav-button primary"
-        onclick="toggleStats('playoffs')"
+        :class="{ active: activeStatsTab === 'playoffs' }"
+        @click="activeStatsTab = 'playoffs'"
         id="playoffs-btn"
       >
         Playoffs Stats
       </button>
       <button
         class="nav-button primary"
-        onclick="toggleStats('international')"
+        :class="{ active: activeStatsTab === 'international' }"
+        @click="activeStatsTab = 'international'"
         id="international-btn"
       >
         International Stats
@@ -29,19 +32,39 @@
     </div>
     <div class="table-container">
       <div
-        v-if="regularSeasonStats.length > 0"
+        v-if="activeStatsTab === 'regular' && regularSeasonStats.length > 0"
         id="regular-stats"
         class="stats-section"
       >
         <h3 class="seaction-header">Regular Season Statistics</h3>
-        <StatsVue :stats="regularSeasonStats" />
+        <StatsVue :stats="regularSeasonStats" id="regular-season-stats" />
+      </div>
+
+      <div
+        v-else-if="activeStatsTab === 'playoffs' && playoffsStats.length > 0"
+        id="playoffs-stats"
+        class="stats-section"
+      >
+        <h3 class="seaction-header">Playoff Statistics</h3>
+        <StatsVue :stats="playoffsStats" id="playoffs-season-stats" />
+      </div>
+
+      <div
+        v-else-if="
+          activeStatsTab === 'international' && internationalStats.length > 0
+        "
+        id="international-stats"
+        class="stats-section"
+      >
+        <h3 class="seaction-header">International Statistics</h3>
+        <StatsVue :stats="internationalStats" id="international-season-stats" />
       </div>
     </div>
   </section>
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import StatsVue from './StatsVue.vue'
 
 const props = defineProps({
@@ -50,6 +73,8 @@ const props = defineProps({
     default: null
   }
 })
+
+const activeStatsTab = ref('regular')
 
 const internationalLeaguesDictionary = {
   OG: 'Olympic Games',

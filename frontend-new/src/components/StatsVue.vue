@@ -1,5 +1,5 @@
 <template>
-  <table class="stats-table">
+  <table class="stats-table" :id="id || undefined">
     <thead>
       <tr>
         <th>Season</th>
@@ -54,6 +54,10 @@ const props = defineProps({
   stats: {
     type: Array,
     default: () => []
+  },
+  id: {
+    type: String,
+    default: ''
   }
 })
 
