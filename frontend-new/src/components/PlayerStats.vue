@@ -6,7 +6,7 @@
 
     <div class="stats-section-header">
       <button
-        class="nav-button primary"
+        class="stats-button primary"
         :class="{ active: activeStatsTab === 'regular' }"
         @click="activeStatsTab = 'regular'"
         id="regular-btn"
@@ -14,7 +14,7 @@
         Season Stats
       </button>
       <button
-        class="nav-button primary"
+        class="stats-button primary"
         :class="{ active: activeStatsTab === 'playoffs' }"
         @click="activeStatsTab = 'playoffs'"
         id="playoffs-btn"
@@ -22,7 +22,7 @@
         Playoffs Stats
       </button>
       <button
-        class="nav-button primary"
+        class="stats-button primary"
         :class="{ active: activeStatsTab === 'international' }"
         @click="activeStatsTab = 'international'"
         id="international-btn"
@@ -36,7 +36,6 @@
         id="regular-stats"
         class="stats-section"
       >
-        <h3 class="seaction-header">Regular Season Statistics</h3>
         <StatsVue :stats="regularSeasonStats" id="regular-season-stats" />
       </div>
 
@@ -45,7 +44,6 @@
         id="playoffs-stats"
         class="stats-section"
       >
-        <h3 class="seaction-header">Playoff Statistics</h3>
         <StatsVue :stats="playoffsStats" id="playoffs-season-stats" />
       </div>
 
@@ -56,7 +54,6 @@
         id="international-stats"
         class="stats-section"
       >
-        <h3 class="seaction-header">International Statistics</h3>
         <StatsVue :stats="internationalStats" id="international-season-stats" />
       </div>
     </div>

@@ -2,13 +2,14 @@
   <!-- Main Content -->
   <main class="main-content">
     <!-- Loading State -->
-    <!-- <div id="loading-container" class="loading-state">
+    <div id="loading-container" class="loading-state" v-if="loading">
       <div class="loading-spinner"></div>
       <p>Loading for player statistics...</p>
-    </div> -->
+    </div>
 
     <!-- Player Information Section -->
     <section
+      v-else
       id="player-info-section"
       class="player-info-section"
       v-show="player"
@@ -101,7 +102,7 @@
     </section>
 
     <!-- Player Statistics Section -->
-    <PlayerStats :player="player" />
+    <PlayerStats v-if="!loading" :player="player" />
   </main>
 </template>
 
@@ -120,10 +121,12 @@ async function fetchPlayerById (id) {
   if (!id) return
   loading.value = true
 
-  const response = await fetch(`http://127.0.0.1:5000/player-card?id=${id}`)
-
-  player.value = await response.json()
-  loading.value = false
+  try {
+    const response = await fetch(`http://127.0.0.1:5000/player-card?id=${id}`)
+    player.value = await response.json()
+  } finally {
+    loading.value = false
+  }
 }
 
 onMounted(() => fetchPlayerById(props.id))
