@@ -19,7 +19,9 @@
       <div v-if="loading">Loading...</div>
 
       <div v-for="player in results" :key="player.playerId" class="player">
-        <p>{{ player.name }}</p>
+        <router-link :to="`/player/${player.playerId}`"
+          >View {{ player.name }}
+        </router-link>
       </div>
 
       <div v-if="input && !results.length && !loading" class="item error">
