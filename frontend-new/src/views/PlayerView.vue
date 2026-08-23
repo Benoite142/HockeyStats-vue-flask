@@ -26,7 +26,9 @@
             <div class="player-background-overlay"></div>
             <div class="player-card-content">
               <div class="player-bio-content">
-                <!-- <div class="player-bio-grid">{{ bioLines }}</div> -->
+                <div class="player-bio-grid">
+                  <BioLines :player="player" />
+                </div>
                 <div class="player-headshot-section">
                   <div class="player-headshot-wrapper">
                     <img
@@ -37,7 +39,7 @@
                   </div>
                 </div>
                 <div class="player-jersey-number">
-                  {{ player.number ? player.number : '' }}
+                  {{ player.sweaterNumber ? '#' + player.sweaterNumber : '' }}
                 </div>
               </div>
 
@@ -46,7 +48,7 @@
                   {{ player.firstName }} {{ player.lastName }}
                 </h1>
                 <div class="player-career-stats">
-                  <h1 class="career-stats-title">{{ player.career_stats }}</h1>
+                  <h1 class="career-stats-title">Career Statistics</h1>
                   <template
                     v-if="
                       player.careerTotals && player.careerTotals.regularSeason
@@ -109,6 +111,7 @@
 <script setup>
 import { onMounted, ref } from 'vue'
 import PlayerStats from '@/components/PlayerStats.vue'
+import BioLines from '@/components/BioLines.vue'
 
 const props = defineProps({
   id: String
